@@ -10,11 +10,11 @@ public class DotDetector : MonoBehaviour
     public GameObject winOrLoss;
     public GameObject dotSpawner;
     public GameObject circlesLeft;
-    public SerialPort sp = new SerialPort("COM3", 9600);
+    //public SerialPort sp = new SerialPort("COM3", 9600);
 
     void Start() {
-        sp.Open();
-        sp.ReadTimeout = 20;
+        //sp.Open();
+        //sp.ReadTimeout = 20;
     }
 
     void OnTriggerEnter2D(Collider2D other) {
