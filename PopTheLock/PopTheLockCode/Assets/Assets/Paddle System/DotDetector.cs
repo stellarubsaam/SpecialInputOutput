@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using System.IO.Ports;
 
 public class DotDetector : MonoBehaviour
@@ -10,11 +8,14 @@ public class DotDetector : MonoBehaviour
     public GameObject winOrLoss;
     public GameObject dotSpawner;
     public GameObject circlesLeft;
-    //public SerialPort sp = new SerialPort("COM3", 9600);
+    public SerialPort sp = new SerialPort();
+    public int onButtonClick;
 
     void Start() {
-        //sp.Open();
-        //sp.ReadTimeout = 20;
+        sp.PortName = "COM3";
+        sp.BaudRate = 9600;
+        sp.Open();
+        sp.ReadTimeout = 1;
     }
 
     void OnTriggerEnter2D(Collider2D other) {
@@ -23,7 +24,7 @@ public class DotDetector : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D collision) {
         _currentDot = null;
-        if (!Input.GetKeyDown("space")) {
+        if (onButtonClick != 1) {
             GetComponent<AnchoredMotor>().speed = 0;
             winOrLoss.GetComponent<WinOrLoss>().gameOver = true;
         }
@@ -31,7 +32,15 @@ public class DotDetector : MonoBehaviour
 
     void Update() {
 
-        if (Input.GetKeyDown("space")) {
+        try {
+            onButtonClick = sp.ReadByte();
+        }
+        catch (System.Exception) {
+        }
+
+        Debug.Log(onButtonClick);
+
+        if (onButtonClick == 1) {
             if (!_isRunning) {
                 _isRunning = true;
                 return;

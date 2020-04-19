@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class AnchoredMotor : MonoBehaviour
 {
@@ -18,7 +16,7 @@ public class AnchoredMotor : MonoBehaviour
             transform.RotateAround(_anchor.position, Vector3.forward, speed * Time.deltaTime * -(int)_direction);
         }      
 
-        if (Input.GetKeyDown("space")) {
+        if (GetComponent<DotDetector>().onButtonClick == 1) {
             if (!_isRunning) {
                 _isRunning = true;
                 return;

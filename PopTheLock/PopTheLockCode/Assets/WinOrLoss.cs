@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -19,6 +17,7 @@ public class WinOrLoss : MonoBehaviour
         }
 
         if (gameOver) {
+            paddle.GetComponent<DotDetector>().sp.Close();
             winOrLossText.text = "GAME OVER";
             if (Input.GetKeyDown("space")) {
                 SceneManager.LoadScene("Game");
